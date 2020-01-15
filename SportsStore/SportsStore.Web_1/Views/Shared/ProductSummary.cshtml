@@ -1,0 +1,42 @@
+﻿@model SportsStore.Domain.Entities.Product
+
+<div class="row">
+   
+    <div class="col-4">
+        <div class="product-name">
+            <h4>@Model.Name</h4>
+        </div>
+        <div>
+            @if (Model.ImageData != null)
+            {
+                <img height="150px" width="150px" src="@Url.Action("GetImage", "Product", new {
+Model.ProductId })" />
+            }
+            </div>
+    </div>
+    
+
+   
+
+<div class="col-8">
+
+    <p>@Model.Description</p>
+    <div>
+        <p>Price:@Model.Price.ToString("c")</p>
+    </div>
+
+    <div>
+
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input class="btn btn-dark" type="submit" value=" Add to cart" />
+        }
+    </div>
+
+</div>
+    
+
+
+</div>
